@@ -26,6 +26,16 @@
   </filter>
   <filter-mapping>
     <filter-name>AdministrationFilter</filter-name>
-    <url-pattern>/administration/*</url-pattern>
+    <url-pattern>/administration</url-pattern>
   </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EtudiantServlet</display-name>
+    <servlet-name>EtudiantServlet</servlet-name>
+    <servlet-class>com.ens.servlets.EtudiantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EtudiantServlet</servlet-name>
+    <url-pattern>/administration/etudiants/*</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -19,7 +19,7 @@ import com.ens.beans.CookieBean;
 /**
  * Servlet Filter implementation class AdministrationFilter
  */
-@WebFilter("/administration/*")
+@WebFilter("/administration/")
 public class AdministrationFilter extends HttpFilter implements Filter {
        
     /**
