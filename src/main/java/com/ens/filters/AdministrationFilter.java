@@ -19,7 +19,7 @@ import com.ens.beans.CookieBean;
 /**
  * Servlet Filter implementation class AdministrationFilter
  */
-@WebFilter("/administration/")
+@WebFilter("/administration/*")
 public class AdministrationFilter extends HttpFilter implements Filter {
        
     /**
@@ -42,7 +42,6 @@ public class AdministrationFilter extends HttpFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		// place your code here
 
 		HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
@@ -51,25 +50,11 @@ public class AdministrationFilter extends HttpFilter implements Filter {
 
         String role =instance.getCookie(req.getCookies(), "role");
         
-        if(role!=null) {
-        	switch (role) {
-				case (String)"admin": {			
-					res.sendRedirect(req.getContextPath() + "/administration/etudiants");
-					return;
-				}
-				case (String)"user": {						
-					res.sendRedirect(req.getContextPath() + "/utilisation/etudiants");
-					return;
-				}
-				default:
-					res.sendRedirect(req.getContextPath() + "/");
-					return;
-			}
+        if (role==null || role!="admin") {
+        	//res.sendRedirect(req.getContextPath() + "/");
+			//return;
         }
-        res.sendRedirect(req.getContextPath() + "/");
-		return;
-        
-        
+        chain.doFilter(req, res);
 	}
 
 	/**

@@ -27,10 +27,14 @@
 	    </div>
 	</c:if>
 
+
 	<%
 		
 		//String hh=(String)request.getParameter("direction");
-		//out.println(hh);
+		out.println(request.getAttribute("role"));
 	%>
+	<form action="insert" method="post">
+		<input type="submit"  value="ggg" />
+	</form>
 </body>
 </html>

@@ -30,6 +30,7 @@ public class WelcomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String direction = request.getParameter("direction");
+		String ee = request.getServletPath();
 		if (direction != null) {
 		    switch (direction) {
 		        case "administration":
@@ -48,7 +49,8 @@ public class WelcomeServlet extends HttpServlet {
 		
 		CookieBean instance=new CookieBean();
 
-		request.setAttribute("role",instance.getCookie(request.getCookies(), "role") );
+		//request.setAttribute("role",instance.getCookie(request.getCookies(), "role") );
+		request.setAttribute("role",ee );
 		request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 	}
 
