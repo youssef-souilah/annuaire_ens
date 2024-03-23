@@ -17,7 +17,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>WelcomeServlet</servlet-name>
-    <url-pattern>/app</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
   <filter>
     <display-name>AdministrationFilter</display-name>

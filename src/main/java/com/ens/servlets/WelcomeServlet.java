@@ -30,27 +30,27 @@ public class WelcomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String direction = request.getParameter("direction");
-		String ee = request.getServletPath();
+		
 		if (direction != null) {
 		    switch (direction) {
 		        case "administration":
 		            response.addCookie(new Cookie("role", "admin"));
-		            response.sendRedirect("/annuaire_ens/administration");
+		            response.sendRedirect("/annuaire_ens/etudiants");
 		            return;
 		        case "utilisation":
-		            response.addCookie(new Cookie("role", "user"));
-		            response.sendRedirect("/annuaire_ens/utilisation");
+		        	response.addCookie(new Cookie("role", "user"));
+		        	response.sendRedirect("/annuaire_ens/etudiants");
 		            return;
 		        default:
 		            request.setAttribute("error", "Direction invalide");
 		            break;
 		    }
+		    
 		}
 		
 		CookieBean instance=new CookieBean();
 
-		//request.setAttribute("role",instance.getCookie(request.getCookies(), "role") );
-		request.setAttribute("role",ee );
+		
 		request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 	}
 

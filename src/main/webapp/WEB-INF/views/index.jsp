@@ -28,11 +28,7 @@
 	</c:if>
 
 
-	<%
-		
-		//String hh=(String)request.getParameter("direction");
-		out.println(request.getAttribute("role"));
-	%>
+	
 	<form action="insert" method="post">
 		<input type="submit"  value="ggg" />
 	</form>
