@@ -17,7 +17,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>WelcomeServlet</servlet-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/app</url-pattern>
   </servlet-mapping>
   <filter>
     <display-name>AdministrationFilter</display-name>
@@ -28,7 +28,6 @@
     <filter-name>AdministrationFilter</filter-name>
     <url-pattern>/administration/*</url-pattern>
   </filter-mapping>
- 
   <servlet>
     <description></description>
     <display-name>EtudiantServlet</display-name>
@@ -38,5 +37,15 @@
   <servlet-mapping>
     <servlet-name>EtudiantServlet</servlet-name>
     <url-pattern>/etudiants</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TestServlet</display-name>
+    <servlet-name>TestServlet</servlet-name>
+    <servlet-class>com.ens.servlets.TestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TestServlet</servlet-name>
+    <url-pattern>/test</url-pattern>
   </servlet-mapping>
 </web-app>
