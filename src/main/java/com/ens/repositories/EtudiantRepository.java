@@ -12,7 +12,8 @@ import com.ens.utils.DatabaseConnector;
 
 public class EtudiantRepository implements BaseRepository<Etudiant, Integer> {
 
-    private static final String FIND_BY_ID_QUERY = "SELECT * FROM etudiants WHERE id = ?";
+	private static final String FIND_BY_ID_QUERY = "SELECT * FROM etudiants WHERE id = ?";
+    private static final String FIND_BY_LONG_NAME_QUERY ="SELECT * FROM etudiants WHERE nom=? and prenom=? or nom=? and prenom=?";
     private static final String FIND_ALL_QUERY = "SELECT * FROM etudiants";
     private static final String SAVE_QUERY = "INSERT INTO etudiants (CNE, nom, prenom, filiere, departement, telephone) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_QUERY = "UPDATE etudiants SET CNE = ?, nom = ?, prenom = ?, filiere = ?, departement = ?, telephone = ? WHERE id = ?";
@@ -31,6 +32,23 @@ public class EtudiantRepository implements BaseRepository<Etudiant, Integer> {
             connection.close();
         }
         return Optional.empty();
+    }
+    
+    public Etudiant findByLongName(String firstName,String lastName) throws SQLException {
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_LONG_NAME_QUERY)) {
+        	statement.setString(1, lastName);
+        	statement.setString(2, firstName);
+        	statement.setString(3, firstName);
+        	statement.setString(4, lastName);
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    return cast(result);
+                }
+            }
+            connection.close();
+        }
+        return null;
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.ens.repositories.EtudiantRepository;
 /**
  * Servlet implementation class EtudiantServlet
  */
+
 public class EtudiantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EtudiantRepository reporisory;
@@ -34,16 +35,32 @@ public class EtudiantServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String direction=request.getContextPath();
-		
+		String direction=request.getRequestURI();
+		String[] uriParts = direction.split("/");
+        direction = uriParts[uriParts.length - 1];
+        
+        request.setAttribute("d", direction);
 		switch (direction) {
-		case "/n": {
-			
-			
+		case "ajouter": {
+			request.getRequestDispatcher("/WEB-INF/views/etudiants/ajouter.jsp").forward(request, response);
+			break;
 		}
-		default:
+		case "rechercher": {
+			rechercher(request, response);
+			break;
+		}
+		case "modifier": {
+			request.getRequestDispatcher("/WEB-INF/views/etudiants/ajouter.jsp").forward(request, response);
+			break;
+		}
+		case "etudiants": {
 			index(request,response);
 			break;
+		}
+		default:
+			request.getRequestDispatcher("/WEB-INF/views/test.jsp").forward(request, response);
+			break;
+
 		}
 		
 		//
@@ -71,6 +88,20 @@ public class EtudiantServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher("/WEB-INF/views/etudiants/index.jsp").forward(request, response);
+	}
+	protected void rechercher(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+		String search=request.getParameter("param");
+		if (search!=null) {
+			String[] items = search.split(" ");
+			try {
+				request.setAttribute("item", this.reporisory.findByLongName(items[0],items[1]));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
+		
+		request.getRequestDispatcher("/WEB-INF/views/etudiants/rechercher.jsp").forward(request, response);
 	}
 
 }

@@ -47,7 +47,7 @@ main {
 	      		<div class="flex flex-col  h-full w-full items-center ">
 				    <!-- Include main content -->
 				    
-				    
+				    <%out.print(request.getAttribute("d")); %>
 				    
 				    
 					
@@ -68,12 +68,12 @@ main {
                   </div>
                 </div>
                 <div class ="flex flex-row items-center ">
-	                <a href="rechercher" class="self-end">
+	                <a href="etudiants/rechercher" class="self-end">
 		                <button type="button" class=" py-3 px-4 mx-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-yellow-600 text-white hover:bg-yellow-700 disabled:opacity-50 disabled:pointer-events-none ">
 						  Rechercher
 						</button>
 	                </a>
-	                <a href="new" class="self-end">
+	                <a href="etudiants/ajouter" class="self-end">
 		                <button type="button" class=" py-3 px-4 mx-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none ">
 						  Ajouter
 						</button>
@@ -104,8 +104,8 @@ main {
 	                      	<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${etudiant.filiere}</td>
 	                      	<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${etudiant.telephone}</td>
 	                      	<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-	                      		<a href="edit"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-pencil-alt"></i></a>
-	                        	<a href="delete"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-trash-alt"></i></a>
+	                      		<a href="etudiants/modifier?id=${etudiant.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-pencil-alt"></i></a>
+	                        	<a href="etudiants/supprimer?id=${etudiant.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-trash-alt"></i></a>
 	                      	</td>
 	                    </tr>
 					</c:forEach>
