@@ -47,9 +47,13 @@ main {
 	      		<div class="flex flex-col  h-full w-full items-center ">
 				    <!-- Include main content -->
 				    
-					<div class="flex flex-col w-full h-full">
-  <div class="-m-1.5 overflow-x-auto">
+				    
+				    
+				    
+					
+  <div class=" overflow-x-auto w-full">
     <div class="p-1.5 min-w-full inline-block align-middle">
+    <h1 class="font-semibold text-xl text-blue-500">Etudiants</h1>
       <div class="flex flex-col">
         <div class="-m-1.5 overflow-x-auto">
           <div class="p-1.5 min-w-full inline-block align-middle">
@@ -63,11 +67,18 @@ main {
                     <svg class="size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                   </div>
                 </div>
-                <a href="new" class="self-end">
-                <button type="button" class=" py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none ">
-				  Solid
-				</button>
-                </a>
+                <div class ="flex flex-row items-center ">
+	                <a href="rechercher" class="self-end">
+		                <button type="button" class=" py-3 px-4 mx-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-yellow-600 text-white hover:bg-yellow-700 disabled:opacity-50 disabled:pointer-events-none ">
+						  Rechercher
+						</button>
+	                </a>
+	                <a href="new" class="self-end">
+		                <button type="button" class=" py-3 px-4 mx-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none ">
+						  Ajouter
+						</button>
+	                </a>
+                </div>
                 
               </div>
               <div class="overflow-hidden">
@@ -109,7 +120,10 @@ main {
       </div>
     </div>
   </div>
-</div>
+
+
+
+
 				    
 		    
 		    	</div>
