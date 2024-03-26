@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Annuaire de l’ENS</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.css">	
 <style>
   
   
@@ -45,7 +46,16 @@ main {
 		    <jsp:include page="components/nav.jsp" />
 		    <section class="flex-1 pt-3 p-6 lg:mb-0 lg:min-h-0 lg:min-w-0">
 	      		<div class="flex flex-col  h-full w-full items-center ">
+	      		
+	      		
+	      		
 				    <!-- Include main content -->
+				    
+				    
+				   
+
+				    
+				    
 				    
 					<div class="flex flex-col w-full h-full">
   <div class="-m-1.5 overflow-x-auto">
@@ -111,5 +121,14 @@ main {
     </section>
     <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
 	<script src="https://cdn.tailwindcss.com"></script>
+	<script type="text/javascript">
+  function toggleModal(modalID){
+    document.getElementById(modalID).classList.toggle("hidden");
+    document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+    document.getElementById(modalID).classList.toggle("flex");
+    document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+  }
+</script>
+	
 </body>
 </html>

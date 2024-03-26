@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Annuaire de l’ENS</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.css">	
+
 <style>
   
   
@@ -68,16 +70,13 @@ main {
                   </div>
                 </div>
                 <div class ="flex flex-row items-center ">
-	                <a href="etudiants/rechercher" class="self-end">
-		                <button type="button" class=" py-3 px-4 mx-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-yellow-600 text-white hover:bg-yellow-700 disabled:opacity-50 disabled:pointer-events-none ">
-						  Rechercher
-						</button>
-	                </a>
-	                <a href="etudiants/ajouter" class="self-end">
-		                <button type="button" class=" py-3 px-4 mx-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none ">
-						  Ajouter
-						</button>
-	                </a>
+	                
+	                <button type="button" class=" py-3 px-4 mx-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-yellow-600 text-white hover:bg-yellow-700 disabled:opacity-50 disabled:pointer-events-none ">
+					  Rechercher
+					</button>
+	                
+	                <%@include  file="./insertEtudiant.html" %>
+	                
                 </div>
                 
               </div>
@@ -132,5 +131,13 @@ main {
     </section>
     <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
 	<script src="https://cdn.tailwindcss.com"></script>
+	<script type="text/javascript">
+  function toggleModal(modalID){
+    document.getElementById(modalID).classList.toggle("hidden");
+    document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+    document.getElementById(modalID).classList.toggle("flex");
+    document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+  }
+</script>
 </body>
 </html>
