@@ -138,6 +138,10 @@ main {
     document.getElementById(modalID).classList.toggle("flex");
     document.getElementById(modalID + "-backdrop").classList.toggle("flex");
   }
+  document.getElementById("close-modal").addEventListener('click',(e)=>{
+	  window.location.href = '/annuaire_ens/etudiants';
+  })
+  
 </script>
 </body>
 </html>

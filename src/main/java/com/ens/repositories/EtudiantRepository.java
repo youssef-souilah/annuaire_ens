@@ -34,6 +34,20 @@ public class EtudiantRepository implements BaseRepository<Etudiant, Integer> {
         return Optional.empty();
     }
     
+    public Etudiant findById(Integer id) throws SQLException {
+        try (Connection connection = DatabaseConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_ID_QUERY)) {
+        	statement.setInt(1,(int) id);
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                	 return cast(result);
+                }
+            }
+            connection.close();
+        }
+        return null;
+    }
+    
     public Etudiant findByLongName(String firstName,String lastName) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_LONG_NAME_QUERY)) {

@@ -19,6 +19,7 @@ import com.ens.repositories.EtudiantRepository;
 public class EtudiantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EtudiantRepository reporisory;
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,28 +39,23 @@ public class EtudiantServlet extends HttpServlet {
 		String direction=request.getRequestURI();
 		String[] uriParts = direction.split("/");
         direction = uriParts[uriParts.length - 1];
-        
-        request.setAttribute("d", direction);
+        request.setAttribute("d", request.getParameter("id"));
 		switch (direction) {
-		case "ajouter": {
-			request.getRequestDispatcher("/WEB-INF/views/etudiants/ajouter.jsp").forward(request, response);
-			break;
-		}
-		case "rechercher": {
-			rechercher(request, response);
-			break;
-		}
-		case "modifier": {
-			request.getRequestDispatcher("/WEB-INF/views/etudiants/ajouter.jsp").forward(request, response);
-			break;
-		}
-		case "etudiants": {
-			index(request,response);
-			break;
-		}
-		default:
-			request.getRequestDispatcher("/WEB-INF/views/test.jsp").forward(request, response);
-			break;
+			case "rechercher": {
+				rechercher(request, response);
+				break;
+			}
+			case "modifier": {
+				modifier(request, response);
+				break;
+			}
+			case "etudiants": {
+				index(request,response);
+				break;
+			}
+			default:
+				request.getRequestDispatcher("/WEB-INF/views/test.jsp").forward(request, response);
+				break;
 
 		}
 		
@@ -87,7 +83,30 @@ public class EtudiantServlet extends HttpServlet {
 			} 
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/views/etudiants/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/etudiants/insertEtudiant.jsp").forward(request, response);
+	}
+	protected void modifier(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		if (request.getParameter("id") == null) {
+			
+			response.sendRedirect("/annuaire_ens/etudiants");
+			return;
+		}
+		else {
+			try {
+			    int id = Integer.parseInt(request.getParameter("id"));
+			    try {
+					request.setAttribute("list", this.reporisory.findAll());
+					request.setAttribute("etudiant",this.reporisory.findById(id));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			} catch (NumberFormatException e) {
+				response.sendRedirect("/annuaire_ens/etudiants");
+				return;
+			}
+		}
+		request.getRequestDispatcher("/WEB-INF/views/etudiants/insertEtudiant.jsp").forward(request, response);
 	}
 	protected void rechercher(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 		String search=request.getParameter("param");

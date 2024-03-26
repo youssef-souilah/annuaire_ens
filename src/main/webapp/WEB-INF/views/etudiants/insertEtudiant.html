@@ -1,14 +1,30 @@
  <button class="bg-blue-500 text-white hover:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
   Ajouter
 </button>
-<div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center " id="modal-id">
+
+<c:if test="${not empty requestScope.etudiant}">
+	<div class="flex opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+	<div class=" flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center " id="modal-id">
+</c:if>
+<c:if test="${ empty requestScope.etudiant}">
+	<div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+   	 <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center " id="modal-id">
+   	 
+</c:if>
+
   <div class="relative w-auto my-6 mx-auto max-w-6xl">
     <!--content-->
     <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none items-center">
       <!--header-->
       <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
         <h3 class="text-3xl font-semibold">
-          Ajouter Etudiant
+        	<c:if test="${not empty requestScope.etudiant}">
+        		Modifier Etudiant
+			</c:if>
+			<c:if test="${ empty requestScope.etudiant}">
+				Ajouter Etudiant
+			</c:if>
+          
         </h3>
         <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onclick="toggleModal('modal-id')">
           <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
@@ -18,25 +34,31 @@
       </div>
       <!--body-->
       <div class="relative p-6  w-11/12 flex items-center justify-center ">
-        <form action="" class=" w-11/12">
+      	<c:if test="${not empty requestScope.etudiant}">
+	    	 <form action="etudiants/editer?id=${etudiant.id}" class=" w-11/12" method="post">
+		</c:if>
+		<c:if test="${ empty requestScope.etudiant}">
+	    	 <form action="etudiants/ajouter" class=" w-11/12" method="post">
+		</c:if>
+       
         	<div class="flex flex-row w-full  max-[600px]:flex-wrap">
         		<div class="mb-3 pt-0 w-10/12 mx-5">
 	        		<label class="text-lg font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 uppercase last:mr-0 mr-1">CIN</label>
-				  	<input type="text" name="cin" placeholder="CIN" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-1 shadow outline-none focus:outline-none focus:ring w-full"/>
+				  	<input type="number" name="cne" placeholder="CNE" value="${etudiant.CNE}" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-1 shadow outline-none focus:outline-none focus:ring w-full" />
 				</div>
 				<div class="mb-3 pt-0 w-10/12 mx-5">
 	        		<label class="text-lg font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 uppercase last:mr-0 mr-1">Prenom</label>
-				  	<input type="text" name="prenom" placeholder="Prenom" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-1 shadow outline-none focus:outline-none focus:ring w-full"/>
+				  	<input type="text" name="prenom" placeholder="Prenom" value="${etudiant.prenom}" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-1 shadow outline-none focus:outline-none focus:ring w-full"/>
 				</div>
         	</div>
         	<div class="flex flex-row w-full max-[600px]:flex-wrap">
         		<div class="mb-3 pt-0 w-10/12 mx-5">
 	        		<label class="text-lg font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 uppercase last:mr-0 mr-1">Nom</label>
-				  	<input type="text" name="nom" placeholder="Nom" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-1 shadow outline-none focus:outline-none focus:ring w-full"/>
+				  	<input type="text" name="nom" placeholder="Nom" value="${etudiant.nom}" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-1 shadow outline-none focus:outline-none focus:ring w-full"/>
 				</div>
 				<div class="mb-3 pt-0 w-10/12 mx-5">
 	        		<label class="text-lg font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 uppercase last:mr-0 mr-1">Telephone</label>
-				  	<input type="text" name="telephone" placeholder="Telephone" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-1 shadow outline-none focus:outline-none focus:ring w-full"/>
+				  	<input type="text" name="telephone" placeholder="Telephone" value="${etudiant.telephone}" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-1 shadow outline-none focus:outline-none focus:ring w-full"/>
 				</div>
         	</div>
         	<div class="mb-3 pt-0 w-full mx-5">
@@ -51,19 +73,18 @@
 				  </select>
 				  
 			</div>
-        	
+        	<div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b self-end">
+		        <button id="close-modal" class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
+		          Annuler
+		        </button>
+		        <button  class="bg-blue-500 text-white hover:bg-hover-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"  >
+		          sauvegarder
+		        </button>
+	      	</div>
         </form>
       </div>
       <!--footer-->
-      <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b self-end">
-        <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
-          Annuler
-        </button>
-        <button class="bg-blue-500 text-white hover:bg-hover-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
-          sauvegarder
-        </button>
-      </div>
+      
     </div>
   </div>
 </div>
-<div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
