@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.ens.models.Etudiant;
 import com.ens.repositories.EtudiantRepository;
+import com.ens.repositories.FiliereRepository;
 
 /**
  * Servlet implementation class EtudiantServlet
@@ -19,6 +20,7 @@ import com.ens.repositories.EtudiantRepository;
 public class EtudiantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EtudiantRepository reporisory;
+	private FiliereRepository filiereReporisory;
 	
        
     /**
@@ -28,6 +30,7 @@ public class EtudiantServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
         this.reporisory=new EtudiantRepository();
+        this.filiereReporisory=new FiliereRepository();
     }
 
 	/**
@@ -77,6 +80,7 @@ public class EtudiantServlet extends HttpServlet {
 			
 			try {
 				request.setAttribute("list", this.reporisory.findAll());
+				request.setAttribute("filieres", this.filiereReporisory.findAll());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -97,6 +101,7 @@ public class EtudiantServlet extends HttpServlet {
 			    try {
 					request.setAttribute("list", this.reporisory.findAll());
 					request.setAttribute("etudiant",this.reporisory.findById(id));
+					request.setAttribute("filieres", this.filiereReporisory.findAll());
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
