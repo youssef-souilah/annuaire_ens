@@ -13,6 +13,7 @@ import com.ens.beans.CookieBean;
 /**
  * Servlet implementation class WelcomeServlet
  */
+@WebServlet("/")
 public class WelcomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

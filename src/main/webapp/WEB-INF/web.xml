@@ -9,25 +9,8 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>WelcomeServlet</display-name>
-    <servlet-name>WelcomeServlet</servlet-name>
-    <servlet-class>com.ens.servlets.WelcomeServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>WelcomeServlet</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
-  <filter>
-    <display-name>AdministrationFilter</display-name>
-    <filter-name>AdministrationFilter</filter-name>
-    <filter-class>com.ens.filters.AdministrationFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>AdministrationFilter</filter-name>
-    <url-pattern>/administration/*</url-pattern>
-  </filter-mapping>
+
+  
   <servlet>
     <description></description>
     <display-name>EtudiantServlet</display-name>
