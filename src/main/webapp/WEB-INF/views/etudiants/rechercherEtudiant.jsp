@@ -49,19 +49,11 @@ main {
 					<div class="w-full flex flex-col">
 						<h1 class="font-semibold text-xl text-blue-500">Rechercher Etudiant</h1>
 						
-						<div class="w-11/12 self-center" >
-							<label class=" text-lg text-blue-500">Le Nom complet</label>
-							<div class="w-11/12 flex flex-row items-center justify-between ">
-								<input 
-									type="text" 
-									placeholder="entrer le nom complet.."
-									id="search" 
-									class="py-3 px-4 block w-10/12 border border-black rounded-lg text-sm     " 
-								/>
-								<button id="searchButton" class="px-5 py-3 bg-blue-500 hover:bg-blue-700 rounded rounded-lg">Rechercher</button>
-							</div>
-						</div>
+						<%@include  file="./rechercherEtudiant.html" %>
 						
+						<c:if test="${requestScope.item eq null }">
+							no Result
+						</c:if>
 						<c:if test="${requestScope.item!=null }">
 							<h1 class="font-semibold text-lg text-blue-500">Resultat</h1>
 							<div class="w-11/12 self-center">
@@ -91,7 +83,8 @@ main {
 	<script type="text/javascript">
 		const searchInput=document.getElementById('search');
 		const searchButton=document.getElementById('searchButton');
-		
+		const searchForm=document.getElementById('recherche-form');
+		/*
 		searchButton.addEventListener("click",(e)=>{
 			var value=searchInput.value;
 			var regex=/^[a-zA-Z]+(?: [a-zA-Z]+)*$/
@@ -101,6 +94,19 @@ main {
 			}
 			else{
 				alert("valeur invalide !\n entrer le nom complet")
+			}
+		});*/
+		searchButton.addEventListener("click",(e)=>{
+			e.preventDefault();
+			var value=searchInput.value;
+			var regex=/^[a-zA-Z]+(?: [a-zA-Z]+)+$/
+			var isValid = regex.test(value);
+			if(isValid){
+				//window.location.href = '/annuaire_ens/etudiants/rechercher?param='+value;
+				searchForm.submit();
+			}
+			else{
+				alert("valeur invalide !\nentrer le nom complet \nexemple: houssam ahmadi")
 			}
 		});
 	</script>

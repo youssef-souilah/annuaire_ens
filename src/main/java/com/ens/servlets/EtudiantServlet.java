@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ens.models.Etudiant;
@@ -76,16 +77,21 @@ public class EtudiantServlet extends HttpServlet {
 	protected void index(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		
 		String search=request.getParameter("search");
-		if (search==null) {
+		
 			
 			try {
-				request.setAttribute("list", this.reporisory.findAll());
+				if (search==null) {
+					request.setAttribute("list", this.reporisory.findAll());
+				}
+				else {
+					request.setAttribute("list", this.reporisory.findByName(search));
+				}
 				request.setAttribute("filieres", this.filiereReporisory.findAll());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
-		}
+		
 		
 		request.getRequestDispatcher("/WEB-INF/views/etudiants/insertEtudiant.jsp").forward(request, response);
 	}
@@ -113,6 +119,7 @@ public class EtudiantServlet extends HttpServlet {
 		}
 		request.getRequestDispatcher("/WEB-INF/views/etudiants/insertEtudiant.jsp").forward(request, response);
 	}
+	
 	protected void rechercher(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 		String search=request.getParameter("param");
 		if (search!=null) {
@@ -125,7 +132,7 @@ public class EtudiantServlet extends HttpServlet {
 			} 
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/views/etudiants/rechercher.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/etudiants/rechercherEtudiant.jsp").forward(request, response);
 	}
 
 }

@@ -14,6 +14,7 @@ public class EtudiantRepository implements BaseRepository<Etudiant, Integer> {
 
 	private static final String FIND_BY_ID_QUERY = "SELECT * FROM etudiants WHERE id = ?";
     private static final String FIND_BY_LONG_NAME_QUERY ="SELECT * FROM etudiants WHERE nom=? and prenom=? or nom=? and prenom=?";
+    private static final String FIND_BY_NAME_QUERY ="SELECT * FROM etudiants WHERE nom=? or  prenom=?";
     private static final String FIND_ALL_QUERY = "SELECT * FROM etudiants";
     private static final String SAVE_QUERY = "INSERT INTO etudiants (CNE, nom, prenom, filiere, departement, telephone) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_QUERY = "UPDATE etudiants SET CNE = ?, nom = ?, prenom = ?, filiere = ?, departement = ?, telephone = ? WHERE id = ?";
@@ -64,6 +65,27 @@ public class EtudiantRepository implements BaseRepository<Etudiant, Integer> {
         }
         return null;
     }
+    public List<Etudiant> findByName(String name) throws SQLException {
+    	List<Etudiant> etudiants = new ArrayList<>();
+        Connection connection=null;
+        try {
+        	
+        	connection = DatabaseConnector.getConnection();
+        	if(connection!=null) {
+        		PreparedStatement statement = connection.prepareStatement(FIND_BY_NAME_QUERY);
+        		statement.setString(1, name);
+        		statement.setString(2, name);
+                ResultSet result = statement.executeQuery() ;
+                while (result.next()) {
+                	etudiants.add(cast(result));
+                }
+                connection.close();
+        	}
+        }finally {
+        	connection.close();
+        }
+        
+        return etudiants;    }
 
     @Override
     public List<Etudiant> findAll() throws SQLException {
