@@ -1,8 +1,8 @@
 package com.ens.models;
 
 public class Etudiant {
-    private int id;
-    private int CNE;
+    private Long id;
+    private Long CNE;
     private String nom;
     private String prenom;
     private String filiere;
@@ -13,7 +13,7 @@ public class Etudiant {
     public Etudiant() {
     }
 
-    public Etudiant(int CNE, String nom, String prenom, String filiere, String departement, String telephone) {
+    public Etudiant(Long CNE, String nom, String prenom, String filiere, String departement, String telephone) {
         this.CNE = CNE;
         this.nom = nom;
         this.prenom = prenom;
@@ -23,19 +23,19 @@ public class Etudiant {
     }
 
     // Getters and setters
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getCNE() {
+    public Long getCNE() {
         return CNE;
     }
 
-    public void setCNE(int CNE) {
+    public void setCNE(Long CNE) {
         this.CNE = CNE;
     }
 

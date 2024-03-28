@@ -10,7 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ens.models.Departement;
 import com.ens.models.Etudiant;
+import com.ens.models.Filiere;
+import com.ens.repositories.DepartementRepository;
 import com.ens.repositories.EtudiantRepository;
 import com.ens.repositories.FiliereRepository;
 
@@ -22,6 +25,7 @@ public class EtudiantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EtudiantRepository reporisory;
 	private FiliereRepository filiereReporisory;
+	private DepartementRepository departementReporisory;
 	
        
     /**
@@ -32,6 +36,7 @@ public class EtudiantServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
         this.reporisory=new EtudiantRepository();
         this.filiereReporisory=new FiliereRepository();
+        this.departementReporisory=new DepartementRepository();
     }
 
 	/**
@@ -55,6 +60,10 @@ public class EtudiantServlet extends HttpServlet {
 			}
 			case "etudiants": {
 				index(request,response);
+				break;
+			}
+			case "ajouter": {
+				ajouter(request,response);
 				break;
 			}
 			default:
@@ -103,7 +112,7 @@ public class EtudiantServlet extends HttpServlet {
 		}
 		else {
 			try {
-			    int id = Integer.parseInt(request.getParameter("id"));
+			    Long id = Long.parseLong(request.getParameter("id"));
 			    try {
 					request.setAttribute("list", this.reporisory.findAll());
 					request.setAttribute("etudiant",this.reporisory.findById(id));
@@ -134,5 +143,38 @@ public class EtudiantServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("/WEB-INF/views/etudiants/rechercherEtudiant.jsp").forward(request, response);
 	}
-
+	
+	protected void ajouter(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		boolean res=false;
+		Long CNE = Long.parseLong( request.getParameter("CNE"));
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		Filiere filiere=new Filiere();
+		Departement departement = new Departement();
+		int filiereId =Integer.parseInt(request.getParameter("filiere"));
+		try {
+			filiere=this.filiereReporisory.findById(filiereId);
+			departement=this.departementReporisory.findById(filiere.getDepartementId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String telephone = request.getParameter("telephone");
+		Etudiant etudiant = new Etudiant();
+		etudiant.setCNE(CNE);
+		etudiant.setNom(nom);
+		etudiant.setPrenom(prenom);
+		etudiant.setFiliere(filiere.getNom());
+		etudiant.setDepartement(departement.getNom());
+		etudiant.setTelephone(telephone);
+		
+		try {
+			res=this.reporisory.save(etudiant);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("etudiantAjouter", res);
+		response.sendRedirect("/annuaire_ens/etudiants");
+	}
 }

@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.ens.models.Etudiant;
+import com.ens.models.Filiere;
 import com.ens.utils.DatabaseConnector;
 
-public class EtudiantRepository implements BaseRepository<Etudiant, Integer> {
+public class EtudiantRepository implements BaseRepository<Etudiant, Long> {
 
 	private static final String FIND_BY_ID_QUERY = "SELECT * FROM etudiants WHERE id = ?";
     private static final String FIND_BY_LONG_NAME_QUERY ="SELECT * FROM etudiants WHERE nom=? and prenom=? or nom=? and prenom=?";
@@ -19,12 +20,20 @@ public class EtudiantRepository implements BaseRepository<Etudiant, Integer> {
     private static final String SAVE_QUERY = "INSERT INTO etudiants (CNE, nom, prenom, filiere, departement, telephone) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_QUERY = "UPDATE etudiants SET CNE = ?, nom = ?, prenom = ?, filiere = ?, departement = ?, telephone = ? WHERE id = ?";
     private static final String DELETE_QUERY = "DELETE FROM etudiants WHERE id = ?";
-
+    
+   
+    
+    public EtudiantRepository() {
+        super();
+        // TODO Auto-generated constructor stub
+        
+        
+    }
     @Override
-    public Optional<Etudiant> find(Integer id) throws SQLException {
+    public Optional<Etudiant> find(Long id) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_ID_QUERY)) {
-        	statement.setInt(1, id);
+        	statement.setLong(1, id);
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
                     return Optional.of(cast(result));
@@ -35,10 +44,10 @@ public class EtudiantRepository implements BaseRepository<Etudiant, Integer> {
         return Optional.empty();
     }
     
-    public Etudiant findById(Integer id) throws SQLException {
+    public Etudiant findById(Long id) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_ID_QUERY)) {
-        	statement.setInt(1,(int) id);
+        	statement.setLong(1,(Long) id);
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
                 	 return cast(result);
@@ -114,9 +123,12 @@ public class EtudiantRepository implements BaseRepository<Etudiant, Integer> {
     	boolean res;
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(SAVE_QUERY)) {
-        	statement.setInt(1, etudiant.getCNE());
+        	
+        	
+        	statement.setLong(1, etudiant.getCNE());
         	statement.setString(2, etudiant.getNom());
         	statement.setString(3, etudiant.getPrenom());
+        	
         	statement.setString(4, etudiant.getFiliere());
         	statement.setString(5, etudiant.getDepartement());
         	statement.setString(6, etudiant.getTelephone());
@@ -131,13 +143,13 @@ public class EtudiantRepository implements BaseRepository<Etudiant, Integer> {
     	boolean res;
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
-        	statement.setInt(1, etudiant.getCNE());
+        	statement.setLong(1, etudiant.getCNE());
         	statement.setString(2, etudiant.getNom());
         	statement.setString(3, etudiant.getPrenom());
         	statement.setString(4, etudiant.getFiliere());
         	statement.setString(5, etudiant.getDepartement());
         	statement.setString(6, etudiant.getTelephone());
-        	statement.setInt(7, etudiant.getId());
+        	statement.setLong(7, etudiant.getId());
         	res= statement.executeUpdate() > 0;
             connection.close();
             return res;
@@ -149,7 +161,7 @@ public class EtudiantRepository implements BaseRepository<Etudiant, Integer> {
     	boolean res;
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_QUERY)) {
-        	statement.setInt(1, etudiant.getId());
+        	statement.setLong(1, etudiant.getId());
         	res= statement.executeUpdate() > 0;
             connection.close();
             return res;
@@ -158,8 +170,8 @@ public class EtudiantRepository implements BaseRepository<Etudiant, Integer> {
 
     private Etudiant cast(ResultSet result) throws SQLException {
         Etudiant etudiant = new Etudiant();
-        etudiant.setId(result.getInt("id"));
-        etudiant.setCNE(result.getInt("CNE"));
+        etudiant.setId(result.getLong("id"));
+        etudiant.setCNE(result.getLong("CNE"));
         etudiant.setNom(result.getString("nom"));
         etudiant.setPrenom(result.getString("prenom"));
         etudiant.setFiliere(result.getString("filiere"));
