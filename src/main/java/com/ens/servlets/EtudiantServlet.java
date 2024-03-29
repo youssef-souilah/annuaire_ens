@@ -61,6 +61,10 @@ public class EtudiantServlet extends HttpServlet {
 				modifier(request, response);
 				break;
 			}
+			case "supprimer": {
+				supprimer(request, response);
+				break;
+			}
 			case "etudiants": {
 				index(request,response);
 				break;
@@ -193,5 +197,53 @@ public class EtudiantServlet extends HttpServlet {
 	        response.addCookie(cookie);
 		}
 		response.sendRedirect("/annuaire_ens/etudiants");
+	}
+	protected void supprimer(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		
+		if (request.getParameter("id") == null) {
+					
+			response.sendRedirect("/annuaire_ens/etudiants");
+			return;
+		}
+		else {
+			try {
+			    Long id = Long.parseLong(request.getParameter("id"));
+			    try {
+			    	Etudiant etudiant=this.reporisory.findById(id);
+			    	if(etudiant!= null) {
+			    		this.reporisory.delete(etudiant);
+			    		String message = "Etudiant supprimee";
+						String encodedMessage = java.net.URLEncoder.encode(message, "UTF-8");
+						Cookie cookie = new Cookie("message", encodedMessage);
+				        cookie.setMaxAge(3); 
+				        response.addCookie(cookie);
+			    		response.sendRedirect("/annuaire_ens/etudiants");
+						return;
+			    	}
+			    	else {
+			    		String message = "Etudiant invalide";
+						String encodedMessage = java.net.URLEncoder.encode(message, "UTF-8");
+						Cookie cookie = new Cookie("erreur", encodedMessage);
+				        cookie.setMaxAge(3); 
+				        response.addCookie(cookie);
+			    		response.sendRedirect("/annuaire_ens/etudiants");
+						return;
+			    	}
+					
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			} catch (NumberFormatException e) {
+				String message = "Erreur est survenue";
+				String encodedMessage = java.net.URLEncoder.encode(message, "UTF-8");
+				Cookie cookie = new Cookie("erreur", encodedMessage);
+		        cookie.setMaxAge(3); 
+		        response.addCookie(cookie);
+				response.sendRedirect("/annuaire_ens/etudiants");
+				return;
+			}
+		}
 	}
 }
