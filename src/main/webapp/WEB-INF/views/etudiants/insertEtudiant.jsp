@@ -46,24 +46,24 @@ main {
 		    <!-- Include navigation menu -->
 		    <jsp:include page="../components/nav.jsp" />
 		    <section class="flex-1 pt-3 p-6 lg:mb-0 lg:min-h-0 lg:min-w-0">
-		    <c:if test="${requestScope.etudiantAjouter eq true }">
+		    <c:if test="${ not empty cookie.message  }">
 			    <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
 				  
 				  <span class="inline-block align-middle mr-8">
-				    <b class="capitalize">Message</b> Etudiant ajoutée !
+				    <b class="capitalize">Message</b> ${cookie.message.value } !
 				  </span>
 				  <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none">
 				    <span>×</span>
 				  </button>
 				</div>
 		    </c:if>
-		    <c:if test="${requestScope.etudiantAjouter eq false }">
+		    <c:if test="${not empty cookie.erreur  }">
 			    <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
 				  <span class="text-xl inline-block mr-5 align-middle">
 				    
 				  </span>
 				  <span class="inline-block align-middle mr-8">
-				    <b class="capitalize">Massage</b>  Erreur!
+				    <b class="capitalize">Message</b>  ${ cookie.erreur.value} !
 				  </span>
 				  <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none">
 				    <span>×</span>

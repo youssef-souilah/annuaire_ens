@@ -2,9 +2,12 @@ package com.ens.servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -174,7 +177,21 @@ public class EtudiantServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("etudiantAjouter", res);
+		
+		if(res) {
+			String message = "Etudiant ajoutee";
+			String encodedMessage = java.net.URLEncoder.encode(message, "UTF-8");
+			Cookie cookie = new Cookie("message", encodedMessage);
+	        cookie.setMaxAge(3); 
+	        response.addCookie(cookie);
+		}
+		else {
+			String message = "Erreur est survenue ";
+			String encodedMessage = java.net.URLEncoder.encode(message, "UTF-8");
+			Cookie cookie = new Cookie("erreur", encodedMessage);
+	        cookie.setMaxAge(3); 
+	        response.addCookie(cookie);
+		}
 		response.sendRedirect("/annuaire_ens/etudiants");
 	}
 }
