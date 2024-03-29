@@ -73,6 +73,21 @@ public class EtudiantServlet extends HttpServlet {
 				ajouter(request,response);
 				break;
 			}
+			case "editer": {
+				try {
+					editer(request,response);
+				} catch (ServletException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			}
 			default:
 				request.getRequestDispatcher("/WEB-INF/views/test.jsp").forward(request, response);
 				break;
@@ -184,6 +199,70 @@ public class EtudiantServlet extends HttpServlet {
 		
 		if(res) {
 			String message = "Etudiant ajoutee";
+			String encodedMessage = java.net.URLEncoder.encode(message, "UTF-8");
+			Cookie cookie = new Cookie("message", encodedMessage);
+	        cookie.setMaxAge(3); 
+	        response.addCookie(cookie);
+		}
+		else {
+			String message = "Erreur est survenue ";
+			String encodedMessage = java.net.URLEncoder.encode(message, "UTF-8");
+			Cookie cookie = new Cookie("erreur", encodedMessage);
+	        cookie.setMaxAge(3); 
+	        response.addCookie(cookie);
+		}
+		response.sendRedirect("/annuaire_ens/etudiants");
+	}
+	protected void editer(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, SQLException {
+		if (request.getParameter("id") == null) {
+			
+			response.sendRedirect("/annuaire_ens/etudiants");
+			return;
+		}
+		Long id = Long.parseLong(request.getParameter("id"));
+		Etudiant etudiant = this.reporisory.findById(id);
+		if(etudiant==null) {
+			String message = "Etudiant invalide";
+			String encodedMessage = java.net.URLEncoder.encode(message, "UTF-8");
+			Cookie cookie = new Cookie("erreur", encodedMessage);
+	        cookie.setMaxAge(3); 
+	        response.addCookie(cookie);
+    		response.sendRedirect("/annuaire_ens/etudiants");
+			return;
+		}
+		boolean res=false;
+		Long CNE = Long.parseLong( request.getParameter("CNE"));
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		Filiere filiere=new Filiere();
+		Departement departement = new Departement();
+		int filiereId =Integer.parseInt(request.getParameter("filiere"));
+		try {
+			filiere=this.filiereReporisory.findById(filiereId);
+			departement=this.departementReporisory.findById(filiere.getDepartementId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String telephone = request.getParameter("telephone");
+		
+		etudiant.setCNE(CNE);
+		etudiant.setNom(nom);
+		etudiant.setPrenom(prenom);
+		etudiant.setFiliere(filiere.getNom());
+		etudiant.setDepartement(departement.getNom());
+		etudiant.setTelephone(telephone);
+		
+		try {
+			res=this.reporisory.update(etudiant);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(res) {
+			String message = "Etudiant modifiee";
 			String encodedMessage = java.net.URLEncoder.encode(message, "UTF-8");
 			Cookie cookie = new Cookie("message", encodedMessage);
 	        cookie.setMaxAge(3); 
