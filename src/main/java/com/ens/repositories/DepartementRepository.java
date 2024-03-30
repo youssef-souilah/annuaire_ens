@@ -48,19 +48,25 @@ public class DepartementRepository implements BaseRepository<Departement, Long> 
         return null;
     }
     
-    public Departement findByLongName(String name) throws SQLException {
-        try (Connection connection = DatabaseConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_BY_LONG_NAME_QUERY)) {
-        	statement.setString(1, name);
-        	
-            try (ResultSet result = statement.executeQuery()) {
-                if (result.next()) {
-                    return cast(result);
-                }
-            }
-            connection.close();
-        }
-        return null;
+    public List<Departement> findByLongName(String name) throws SQLException {
+    	 List<Departement> departements = new ArrayList<>();
+    	 Connection connection=null;
+    	 try {
+         	
+         	connection = DatabaseConnector.getConnection();
+         	if(connection!=null) {
+         		PreparedStatement statement = connection.prepareStatement(FIND_ALL_QUERY);
+         		statement.setString(1, name);
+                 ResultSet result = statement.executeQuery() ;
+                 while (result.next()) {
+                 	departements.add(cast(result));
+                 }
+                 connection.close();
+         	}
+         }finally {
+         	connection.close();
+         }
+		return departements;
     }
 
     @Override
