@@ -1,25 +1,25 @@
 package com.ens.models;
 
 public class Filiere {
-    private int id;
+    private Long id;
     private String nom;
-    private int departementId;
+    private Long departementId;
 
     // Constructors
     public Filiere() {
     }
 
-    public Filiere(String nom, int departementId) {
+    public Filiere(String nom, Long departementId) {
         this.nom = nom;
         this.departementId = departementId;
     }
 
     // Getters and setters
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -31,11 +31,11 @@ public class Filiere {
         this.nom = nom;
     }
 
-    public int getDepartementId() {
+    public Long getDepartementId() {
         return departementId;
     }
 
-    public void setDepartementId(int departementId) {
+    public void setDepartementId(Long departementId) {
         this.departementId = departementId;
     }
 

@@ -1,10 +1,10 @@
 package com.ens.models;
 
 public class Departement {
-    private int id;
+    private Long id;
     private String nom;
 
-    // Constructors
+    
     public Departement() {
     }
 
@@ -13,11 +13,11 @@ public class Departement {
     }
 
     // Getters and setters
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -29,7 +29,7 @@ public class Departement {
         this.nom = nom;
     }
 
-    // toString method for debugging
+    
     @Override
     public String toString() {
         return "Departement{" +

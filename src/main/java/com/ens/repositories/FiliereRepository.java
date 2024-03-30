@@ -10,7 +10,7 @@ import java.util.Optional;
 import com.ens.models.Filiere;
 import com.ens.utils.DatabaseConnector;
 
-public class FiliereRepository implements BaseRepository<Filiere, Integer> {
+public class FiliereRepository implements BaseRepository<Filiere, Long> {
 
 	private static final String FIND_BY_ID_QUERY = "SELECT * FROM filieres WHERE id = ?";
     private static final String FIND_BY_LONG_NAME_QUERY ="SELECT * FROM filieres WHERE nom=? ";
@@ -20,10 +20,10 @@ public class FiliereRepository implements BaseRepository<Filiere, Integer> {
     private static final String DELETE_QUERY = "DELETE FROM filieres WHERE id = ?";
 
     @Override
-    public Optional<Filiere> find(Integer id) throws SQLException {
+    public Optional<Filiere> find(Long id) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_ID_QUERY)) {
-        	statement.setInt(1, id);
+        	statement.setLong(1, id);
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
                     return Optional.of(cast(result));
@@ -34,10 +34,10 @@ public class FiliereRepository implements BaseRepository<Filiere, Integer> {
         return Optional.empty();
     }
     
-    public Filiere findById(Integer id) throws SQLException {
+    public Filiere findById(Long id) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_ID_QUERY)) {
-        	statement.setInt(1,(int) id);
+        	statement.setLong(1,(Long) id);
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
                 	 return cast(result);
@@ -90,7 +90,7 @@ public class FiliereRepository implements BaseRepository<Filiere, Integer> {
         try (Connection connection = DatabaseConnector.getConnection();
             PreparedStatement statement = connection.prepareStatement(SAVE_QUERY)) {
         	statement.setString(1, filiere.getNom());
-        	statement.setInt(2, filiere.getDepartementId());
+        	statement.setLong(2, filiere.getDepartementId());
             res= statement.executeUpdate() > 0;
             connection.close();
             return res;
@@ -102,9 +102,9 @@ public class FiliereRepository implements BaseRepository<Filiere, Integer> {
     	boolean res;
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
-        	statement.setInt(3, filiere.getId());
+        	statement.setLong(3, filiere.getId());
         	statement.setString(1, filiere.getNom());
-        	statement.setInt(2, filiere.getDepartementId());
+        	statement.setLong(2, filiere.getDepartementId());
         	res= statement.executeUpdate() > 0;
             connection.close();
             return res;
@@ -116,7 +116,7 @@ public class FiliereRepository implements BaseRepository<Filiere, Integer> {
     	boolean res;
         try (Connection connection = DatabaseConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_QUERY)) {
-        	statement.setInt(1, filiere.getId());
+        	statement.setLong(1, filiere.getId());
         	res= statement.executeUpdate() > 0;
             connection.close();
             return res;
@@ -125,9 +125,9 @@ public class FiliereRepository implements BaseRepository<Filiere, Integer> {
 
     private Filiere cast(ResultSet result) throws SQLException {
     	Filiere filiere = new Filiere();
-    	filiere.setId(result.getInt("id"));
+    	filiere.setId(result.getLong("id"));
     	filiere.setNom(result.getString("nom"));
-    	filiere.setDepartementId(result.getInt("departement_id"));
+    	filiere.setDepartementId(result.getLong("departement_id"));
 
         return filiere;
     }

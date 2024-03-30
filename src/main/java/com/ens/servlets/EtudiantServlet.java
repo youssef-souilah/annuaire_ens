@@ -136,6 +136,10 @@ public class EtudiantServlet extends HttpServlet {
 			try {
 			    Long id = Long.parseLong(request.getParameter("id"));
 			    try {
+			    	if(this.reporisory.findById(id)==null) {
+			    		response.sendRedirect("/annuaire_ens/etudiants");
+			    		return;
+			    	}
 					request.setAttribute("list", this.reporisory.findAll());
 					request.setAttribute("etudiant",this.reporisory.findById(id));
 					request.setAttribute("filieres", this.filiereReporisory.findAll());
@@ -173,7 +177,7 @@ public class EtudiantServlet extends HttpServlet {
 		String prenom = request.getParameter("prenom");
 		Filiere filiere=new Filiere();
 		Departement departement = new Departement();
-		int filiereId =Integer.parseInt(request.getParameter("filiere"));
+		Long filiereId =Long.parseLong(request.getParameter("filiere"));
 		try {
 			filiere=this.filiereReporisory.findById(filiereId);
 			departement=this.departementReporisory.findById(filiere.getDepartementId());
@@ -236,7 +240,7 @@ public class EtudiantServlet extends HttpServlet {
 		String prenom = request.getParameter("prenom");
 		Filiere filiere=new Filiere();
 		Departement departement = new Departement();
-		int filiereId =Integer.parseInt(request.getParameter("filiere"));
+		Long filiereId =Long.parseLong(request.getParameter("filiere"));
 		try {
 			filiere=this.filiereReporisory.findById(filiereId);
 			departement=this.departementReporisory.findById(filiere.getDepartementId());
