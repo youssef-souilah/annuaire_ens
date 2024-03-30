@@ -116,8 +116,8 @@ main {
 	                  		<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${departement.id}</td>
 	                  		<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">${departement.nom}</td>
 	                      	<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-	                      		<a href="etudiants/modifier?id=${departement.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-pencil-alt"></i></a>
-	                        	<a href="etudiants/supprimer?id=${departement.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-trash-alt"></i></a>
+	                      		<a href="departements/modifier?id=${departement.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-pencil-alt"></i></a>
+	                        	<a href="departements/supprimer?id=${departement.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-trash-alt"></i></a>
 	                      	</td>
 	                    </tr>
 					</c:forEach>
