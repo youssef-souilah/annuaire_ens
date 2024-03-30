@@ -51,7 +51,6 @@ public class EtudiantServlet extends HttpServlet {
 		String direction=request.getRequestURI();
 		String[] uriParts = direction.split("/");
         direction = uriParts[uriParts.length - 1];
-        request.setAttribute("d", request.getParameter("id"));
 		switch (direction) {
 			case "rechercher": {
 				rechercher(request, response);
@@ -89,7 +88,7 @@ public class EtudiantServlet extends HttpServlet {
 				break;
 			}
 			default:
-				request.getRequestDispatcher("/WEB-INF/views/test.jsp").forward(request, response);
+				response.sendRedirect("/annuaire_ens/etudiants");
 				break;
 
 		}
