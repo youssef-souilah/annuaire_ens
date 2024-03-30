@@ -52,7 +52,7 @@ public class DepartementServlet extends HttpServlet {
 				supprimer(request, response);
 				break;
 			}
-			case "etudiants": {
+			case "departements": {
 				index(request,response);
 				break;
 			}
@@ -107,7 +107,7 @@ public class DepartementServlet extends HttpServlet {
 			} 
 		
 		
-		request.getRequestDispatcher("/WEB-INF/views/deparetements/insertDepartement.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/departements/insertDepartement.jsp").forward(request, response);
 	}
 	protected void modifier(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		if (request.getParameter("id") == null) {
