@@ -48,19 +48,25 @@ public class FiliereRepository implements BaseRepository<Filiere, Long> {
         return null;
     }
     
-    public Filiere findByLongName(String name) throws SQLException {
-        try (Connection connection = DatabaseConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_BY_LONG_NAME_QUERY)) {
-        	statement.setString(1, name);
-        	
-            try (ResultSet result = statement.executeQuery()) {
-                if (result.next()) {
-                    return cast(result);
-                }
-            }
-            connection.close();
-        }
-        return null;
+    public List<Filiere>findByLongName(String name) throws SQLException {
+    	List<Filiere> filieres = new ArrayList<>();
+        Connection connection=null;
+    	try {
+         	
+         	connection = DatabaseConnector.getConnection();
+         	if(connection!=null) {
+         		PreparedStatement statement = connection.prepareStatement(FIND_BY_LONG_NAME_QUERY);
+         		statement.setString(1, name);
+                 ResultSet result = statement.executeQuery() ;
+                 while (result.next()) {
+                 	filieres.add(cast(result));
+                 }
+                 connection.close();
+         	}
+         }finally {
+         	connection.close();
+         }
+        return filieres;
     }
 
     @Override
