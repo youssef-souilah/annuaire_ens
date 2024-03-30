@@ -29,4 +29,14 @@
     <servlet-name>DepartementServlet</servlet-name>
     <url-pattern>/departements/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FiliereServlet</display-name>
+    <servlet-name>FiliereServlet</servlet-name>
+    <servlet-class>com.ens.servlets.FiliereServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FiliereServlet</servlet-name>
+    <url-pattern>/filieres/*</url-pattern>
+  </servlet-mapping>
 </web-app>

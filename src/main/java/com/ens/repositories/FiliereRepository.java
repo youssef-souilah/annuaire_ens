@@ -13,6 +13,7 @@ import com.ens.utils.DatabaseConnector;
 public class FiliereRepository implements BaseRepository<Filiere, Long> {
 
 	private static final String FIND_BY_ID_QUERY = "SELECT * FROM filieres WHERE id = ?";
+	private static final String FIND_BY_DEPARTEMENT_ID_QUERY = "SELECT * FROM filieres WHERE departement_id = ?";
     private static final String FIND_BY_LONG_NAME_QUERY ="SELECT * FROM filieres WHERE nom=? ";
     private static final String FIND_ALL_QUERY = "SELECT * FROM filieres";
     private static final String SAVE_QUERY = "INSERT INTO filieres ( nom , departement_id) VALUES ( ?, ?)";
@@ -46,6 +47,26 @@ public class FiliereRepository implements BaseRepository<Filiere, Long> {
             connection.close();
         }
         return null;
+    }
+    public List<Filiere>findByDepartementId(Long departement_id) throws SQLException {
+    	List<Filiere> filieres = new ArrayList<>();
+        Connection connection=null;
+    	try {
+         	
+         	connection = DatabaseConnector.getConnection();
+         	if(connection!=null) {
+         		PreparedStatement statement = connection.prepareStatement(FIND_BY_DEPARTEMENT_ID_QUERY);
+         		statement.setLong(1, departement_id);
+                 ResultSet result = statement.executeQuery() ;
+                 while (result.next()) {
+                 	filieres.add(cast(result));
+                 }
+                 connection.close();
+         	}
+         }finally {
+         	connection.close();
+         }
+        return filieres;
     }
     
     public List<Filiere>findByLongName(String name) throws SQLException {
