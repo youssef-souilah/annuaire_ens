@@ -9,8 +9,6 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-
-  
   <servlet>
     <description></description>
     <display-name>EtudiantServlet</display-name>
@@ -23,12 +21,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>TestServlet</display-name>
-    <servlet-name>TestServlet</servlet-name>
-    <servlet-class>com.ens.servlets.TestServlet</servlet-class>
+    <display-name>DepartementServlet</display-name>
+    <servlet-name>DepartementServlet</servlet-name>
+    <servlet-class>com.ens.servlets.DepartementServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>TestServlet</servlet-name>
-    <url-pattern>/test</url-pattern>
+    <servlet-name>DepartementServlet</servlet-name>
+    <url-pattern>/departements/*</url-pattern>
   </servlet-mapping>
 </web-app>
