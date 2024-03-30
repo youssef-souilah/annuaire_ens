@@ -55,7 +55,7 @@ public class DepartementRepository implements BaseRepository<Departement, Long> 
          	
          	connection = DatabaseConnector.getConnection();
          	if(connection!=null) {
-         		PreparedStatement statement = connection.prepareStatement(FIND_ALL_QUERY);
+         		PreparedStatement statement = connection.prepareStatement(FIND_BY_LONG_NAME_QUERY);
          		statement.setString(1, name);
                  ResultSet result = statement.executeQuery() ;
                  while (result.next()) {
