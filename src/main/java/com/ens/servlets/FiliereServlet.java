@@ -97,7 +97,7 @@ public class FiliereServlet extends HttpServlet {
 		String search=request.getParameter("search");
 		String departement= request.getParameter("departement_id");
 		try {
-			if (search==null||departement==null) {
+			if (search==null &&departement==null) {
 				request.setAttribute("list", this.repository.findAll());
 			}
 			else if(departement!=null){
@@ -131,6 +131,7 @@ public class FiliereServlet extends HttpServlet {
 					request.setAttribute("list", this.repository.findAll());
 					request.setAttribute("filiere",this.repository.findById(id));
 					request.setAttribute("departements", this.departemnetReporisory.findAll());
+					request.setAttribute("departementss", this.departemnetReporisory.findAll());
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
