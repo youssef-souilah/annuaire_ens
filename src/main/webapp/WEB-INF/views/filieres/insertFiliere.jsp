@@ -167,23 +167,26 @@ main {
     </section>
     <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
 	<script src="https://cdn.tailwindcss.com"></script>
-	<script type="text/javascript">
-		const departement=document.getElementById("departement_id");
-		departement.addEventListener('change',(e)=>{
-			if(departement.value){
-				window.location.href = `/annuaire_ens/filieres?departement_id=`+departement.value;
-			}
-		})
-	  	function toggleModal(modalID){
-		    document.getElementById(modalID).classList.toggle("hidden");
-		    document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
-		    document.getElementById(modalID).classList.toggle("flex");
-		    document.getElementById(modalID + "-backdrop").classList.toggle("flex");
-	  	}
-		document.getElementById("close-modal").addEventListener('click',(e)=>{
-			window.location.href = '/annuaire_ens/filieres';
-		})
+	<c:if test="${requestScope.role eq 'admin'}">
+    	<script type="text/javascript">
+	    	const departement=document.getElementById("departement_id");
+			departement.addEventListener('change',(e)=>{
+				if(departement.value){
+					window.location.href = `/annuaire_ens/filieres?departement_id=`+departement.value;
+				}
+			})
+		  	function toggleModal(modalID){
+			    document.getElementById(modalID).classList.toggle("hidden");
+			    document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+			    document.getElementById(modalID).classList.toggle("flex");
+			    document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+		  	}
+			document.getElementById("close-modal").addEventListener('click',(e)=>{
+				window.location.href = '/annuaire_ens/filieres';
+			})
   
-</script>
+		</script>
+	</c:if>
+	
 </body>
 </html>
