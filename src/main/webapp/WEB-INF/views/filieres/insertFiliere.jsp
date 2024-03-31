@@ -94,7 +94,9 @@ main {
                   <input type="submit"  class=" hidden"/>
                 </form>
        			<div class ="flex flex-row items-center ">
-	                <%@include  file="insertFiliere.html" %>
+       				<c:if test="${requestScope.role eq 'admin'}">
+					   	<%@include  file="insertFiliere.html" %>
+					</c:if>
                 </div>
               </div>
               <div class="mb-3 pt-0 w-11/12 mx-5">
@@ -123,7 +125,9 @@ main {
                     <tr>
                       <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">id</th>
                       <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Nom</th>
-                      <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Actions</th>
+                      <c:if test="${requestScope.role eq 'admin'}">
+					    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Actions</th>
+					  </c:if>
                     </tr>
                   </thead>
                   <tbody class="divide-y divide-gray-200">
@@ -131,10 +135,13 @@ main {
 	                  	<tr>
 	                  		<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${filiere.id}</td>
 	                  		<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">${filiere.nom}</td>
-	                      	<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-	                      		<a href="filieres/modifier?id=${filiere.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-pencil-alt"></i></a>
-	                        	<a href="filieres/supprimer?id=${filiere.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-trash-alt"></i></a>
-	                      	</td>
+	                  		<c:if test="${requestScope.role eq 'admin'}">
+						    	<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+		                      		<a href="filieres/modifier?id=${filiere.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-pencil-alt"></i></a>
+		                        	<a href="filieres/supprimer?id=${filiere.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-trash-alt"></i></a>
+		                      	</td>
+						  	</c:if>
+	                      	
 	                    </tr>
 					</c:forEach>
                     

@@ -1,7 +1,7 @@
 <aside class="sm:h-full sm:w-20 w-full h-14 bg-gray-800 text-gray-200">
     <ul class="text-center flex flex-row sm:flex-col w-full">
       <li class="h-14 border-b border-gray-900 hidden sm:block">
-        <a id="page-icon" href="/" class="h-full w-full hover:bg-gray-700 block p-3">
+        <a id="page-icon" href="/annuaire_ens" class="h-full w-full hover:bg-gray-700 block p-3">
           <img class="object-contain h-full w-full hover:bg-gray-700 block" src="/anuaire_ens/assets/imgs/logo.png"
             alt="open-source" />
         </a>

@@ -94,10 +94,10 @@ main {
                   </div>
                   <input type="submit"  class=" hidden"/>
                 </form>
-       <div class ="flex flex-row items-center ">
-	               
-	                <%@include  file="./insertDepartement.html" %>
-	                
+       			<div class ="flex flex-row items-center ">
+	               <c:if test="${requestScope.role eq 'admin'}">
+					    <%@include  file="./insertDepartement.html" %>
+					</c:if>
                 </div>
                 
               </div>
@@ -107,7 +107,10 @@ main {
                     <tr>
                       <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Id</th>
                       <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Nom</th>
-                      <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Actions</th>
+                      <c:if test="${requestScope.role eq 'admin'}">
+					    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Actions</th>
+					  </c:if>
+                      
                     </tr>
                   </thead>
                   <tbody class="divide-y divide-gray-200">
@@ -115,10 +118,13 @@ main {
 	                  	<tr>
 	                  		<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${departement.id}</td>
 	                  		<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">${departement.nom}</td>
-	                      	<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-	                      		<a href="departements/modifier?id=${departement.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-pencil-alt"></i></a>
-	                        	<a href="departements/supprimer?id=${departement.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-trash-alt"></i></a>
-	                      	</td>
+	                  		<c:if test="${requestScope.role eq 'admin'}">
+		                  		<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+		                      		<a href="departements/modifier?id=${departement.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-pencil-alt"></i></a>
+		                        	<a href="departements/supprimer?id=${departement.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-trash-alt"></i></a>
+		                      	</td>
+							 </c:if>
+	                      	
 	                    </tr>
 					</c:forEach>
                     

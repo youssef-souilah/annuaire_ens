@@ -94,14 +94,15 @@ main {
                   </div>
                   <input type="submit"  class=" hidden"/>
                 </form>
-       <div class ="flex flex-row items-center ">
+       			<div class ="flex flex-row items-center ">
 	                <a href="/annuaire_ens/etudiants/rechercher">
 	                	<button type="button" class=" py-3 px-4 mx-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-yellow-600 text-white hover:bg-yellow-700 disabled:opacity-50 disabled:pointer-events-none ">
 						  Rechercher
 						</button>
 	                </a>
-	                <%@include  file="./insertEtudiant.html" %>
-	                
+	                <c:if test="${requestScope.role eq 'admin'}">
+					   <%@include  file="./insertEtudiant.html" %>
+					</c:if>
                 </div>
                 
               </div>
@@ -115,7 +116,9 @@ main {
                       <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Departement</th>
                       <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Filiere</th>
                       <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">telephone</th>
-                      <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Actions</th>
+                      <c:if test="${requestScope.role eq 'admin'}">
+					    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Actions</th>
+					  </c:if>
                     </tr>
                   </thead>
                   <tbody class="divide-y divide-gray-200">
@@ -127,10 +130,12 @@ main {
 	                      	<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${etudiant.departement}</td>
 	                      	<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${etudiant.filiere}</td>
 	                      	<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${etudiant.telephone}</td>
-	                      	<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-	                      		<a href="etudiants/modifier?id=${etudiant.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-pencil-alt"></i></a>
-	                        	<a href="etudiants/supprimer?id=${etudiant.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-trash-alt"></i></a>
-	                      	</td>
+	                      	<c:if test="${requestScope.role eq 'admin'}">
+							   	<td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+		                      		<a href="etudiants/modifier?id=${etudiant.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-pencil-alt"></i></a>
+		                        	<a href="etudiants/supprimer?id=${etudiant.id}"  class="inline-flex items-center gap-x-4 text-lg font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 disabled:opacity-50 disabled:pointer-events-none"><i class="fas fa-trash-alt"></i></a>
+		                      	</td>
+							</c:if>
 	                    </tr>
 					</c:forEach>
                     
