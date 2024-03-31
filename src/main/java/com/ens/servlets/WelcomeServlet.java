@@ -13,7 +13,7 @@ import com.ens.beans.CookieBean;
 /**
  * Servlet implementation class WelcomeServlet
  */
-@WebServlet("/")
+@WebServlet("/bienvenue")
 public class WelcomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,16 +43,10 @@ public class WelcomeServlet extends HttpServlet {
 		        	response.sendRedirect("/annuaire_ens/etudiants");
 		            return;
 		        default:
-		            request.setAttribute("error", "Direction invalide");
-		            break;
+		        	response.sendRedirect("/annuaire_ens/");
+		        	return;
 		    }
-		    
 		}
-		
-		CookieBean instance=new CookieBean();
-
-		
-		request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 	}
 
 	/**

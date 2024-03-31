@@ -2,7 +2,7 @@
     <ul class="text-center flex flex-row sm:flex-col w-full">
       <li class="h-14 border-b border-gray-900 hidden sm:block">
         <a id="page-icon" href="/annuaire_ens" class="h-full w-full hover:bg-gray-700 block p-3">
-          <img class="object-contain h-full w-full hover:bg-gray-700 block" src="/anuaire_ens/assets/imgs/logo.png"
+          <img class="object-contain h-full w-full hover:bg-gray-700 block" src="/annuaire_ens/assets/imgs/logo.png"
             alt="open-source" />
         </a>
       </li>
