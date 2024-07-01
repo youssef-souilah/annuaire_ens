@@ -43,7 +43,7 @@
         	<div class="flex flex-row w-full max-[600px]:flex-wrap">
         		<div class="mb-3 pt-0 w-10/12 mx-5">
 	        		<label class="text-lg font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 uppercase last:mr-0 mr-1">Nom</label>
-				  	<input type="text" name="nom" placeholder="Nom" required="required" value="${filiere.nom}" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-1 shadow outline-none focus:outline-none focus:ring w-full"/>
+				  	<input type="text" pattern="^[A-Za-z]+$"  name="nom" placeholder="Nom" required="required" value="${filiere.nom}" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-1 shadow outline-none focus:outline-none focus:ring w-full"/>
 				</div>
         	</div>
         	<div class="mb-3 pt-0 w-full mx-5">
